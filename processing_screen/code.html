@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BrailleVision - Processing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        @keyframes scan-line {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(400%); opacity: 0; }
+        }
+        
+        .scanning-line {
+            animation: scan-line 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .pulse-effect {
+            animation: pulse-ring 2s ease-in-out infinite;
+        }
+
+        .braille-blur {
+            filter: blur(8px) brightness(0.6);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "tertiary-fixed": "#70f6ff",
+                            "on-error-container": "#ffdad6",
+                            "on-tertiary-fixed": "#002022",
+                            "on-tertiary-container": "#00696f",
+                            "outline-variant": "#4d4632",
+                            "on-primary": "#3a3000",
+                            "error-container": "#93000a",
+                            "on-tertiary": "#00373a",
+                            "background": "#131313",
+                            "on-primary-fixed": "#221b00",
+                            "error": "#ffb4ab",
+                            "on-primary-fixed-variant": "#544600",
+                            "primary": "#fff5dc",
+                            "inverse-primary": "#705d00",
+                            "on-primary-container": "#705d00",
+                            "outline": "#999077",
+                            "surface-container-high": "#2a2a2a",
+                            "surface": "#131313",
+                            "tertiary-fixed-dim": "#00dce7",
+                            "primary-fixed": "#ffe170",
+                            "surface-variant": "#353534",
+                            "on-secondary": "#303030",
+                            "surface-tint": "#e9c400",
+                            "on-secondary-fixed-variant": "#474746",
+                            "on-background": "#e5e2e1",
+                            "tertiary": "#d8fcff",
+                            "on-secondary-fixed": "#1b1b1c",
+                            "surface-dim": "#131313",
+                            "inverse-surface": "#e5e2e1",
+                            "secondary-container": "#474746",
+                            "on-surface-variant": "#d0c6ab",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "primary-container": "#ffd600",
+                            "surface-container-lowest": "#0e0e0e",
+                            "secondary-fixed": "#e5e2e1",
+                            "on-tertiary-fixed-variant": "#004f53",
+                            "surface-bright": "#393939",
+                            "tertiary-container": "#00f0fc",
+                            "on-surface": "#e5e2e1",
+                            "on-error": "#690005",
+                            "on-secondary-container": "#b7b5b4",
+                            "inverse-on-surface": "#313030",
+                            "surface-container-low": "#1c1b1b",
+                            "surface-container-highest": "#353534",
+                            "secondary": "#c8c6c5",
+                            "primary-fixed-dim": "#e9c400",
+                            "surface-container": "#201f1f"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "stack-gap-md": "20px",
+                            "touch-target-min": "56px",
+                            "container-padding": "24px",
+                            "unit": "8px",
+                            "stack-gap-sm": "12px",
+                            "stack-gap-lg": "32px",
+                            "gutter": "16px"
+                    },
+                    "fontFamily": {
+                            "headline-lg": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-sm": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "label-lg": ["Inter"],
+                            "headline-md-mobile": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                            "body-lg": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                            "headline-sm": ["22px", {"lineHeight": "1.3", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "headline-md": ["28px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                            "label-lg": ["16px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "headline-md-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "body-md": ["18px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface border-b-2 border-outline-variant flex justify-between items-center h-[56px] px-container-padding w-full fixed top-0 z-50">
+<button class="text-primary-fixed hover:bg-surface-variant active:scale-95 transition-all p-2 rounded-lg focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-sm-mobile text-headline-sm-mobile font-bold text-primary-fixed">BrailleVision</h1>
+<button class="text-on-surface-variant hover:bg-surface-variant active:scale-95 transition-all p-2 rounded-lg focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="flex-grow pt-[56px] pb-[80px] flex flex-col items-center justify-center container mx-auto px-container-padding max-w-md">
+<!-- Processing Canvas -->
+<div class="relative w-full aspect-square max-h-[360px] rounded-xl overflow-hidden mb-stack-gap-lg bg-surface-container border-2 border-outline-variant">
+<!-- Captured Image Preview (Blurred) -->
+<img alt="Braille texture closeup" class="w-full h-full object-cover braille-blur" data-alt="A macro photograph of embossed Braille dots on high-quality white paper, captured from a shallow angle with deep shadows emphasizing the three-dimensional texture. The image is significantly blurred to prioritize the UI overlay, maintaining a palette of soft greys and deep blacks. The overall mood is technological and focused, with a cinematic, low-key lighting aesthetic that aligns with a high-contrast minimalist interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS8ZDcm55MAuu_GCyl4Y3uGFs1G1qLDLkkL3qylOiJOZZWaez8tjFHmgjDTXO42JyVQzANeyHw1n22jhh9V_3n4EnKROUxKJr7UmdyeTifS-Z0hCaxb8TpjCfUrkfatIKgDBEv1uNDVqLaEJzTTAHYU89ba18WdsyHWuLn7Zp3pkdVIFl0JUZkhKiuCqdKPuLCZLeKaoO6STjLs8DafXxg4Va6ppyy4fHjrLw49Hxa9yhnJkV_Uq5Tc_7Vm5dcolfOuWeHrWr9jh4"/>
+<!-- Scanning Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Outer Pulse -->
+<div class="w-48 h-48 rounded-full border-4 border-primary-container opacity-20 pulse-effect"></div>
+<!-- Inner Progress Ring -->
+<div class="absolute w-40 h-40 rounded-full border-8 border-primary-container border-t-transparent animate-spin"></div>
+<!-- Center Icon -->
+<div class="absolute flex flex-col items-center">
+<span class="material-symbols-outlined text-primary-container text-[48px]" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+<!-- Scanning Line -->
+<div class="absolute top-0 left-0 w-full h-[2px] bg-primary-container shadow-[0_0_15px_#ffd600] scanning-line"></div>
+</div>
+</div>
+<!-- Status & Steps -->
+<div class="w-full space-y-stack-gap-md text-center">
+<div class="mb-stack-gap-lg">
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-primary-container mb-2">Analyzing Braille</h2>
+<p class="text-on-surface-variant font-body-md">Please hold steady while the AI extracts information.</p>
+</div>
+<div class="w-full space-y-stack-gap-sm text-left">
+<!-- Step 1: Complete -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-high border-l-4 border-primary-container transition-all">
+<div class="w-[32px] h-[32px] flex items-center justify-center bg-primary-container rounded-full">
+<span class="material-symbols-outlined text-on-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-lg text-on-surface">Detecting Braille...</span>
+</div>
+<!-- Step 2: Active -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container-highest border-l-4 border-primary-container animate-pulse">
+<div class="w-[32px] h-[32px] flex items-center justify-center bg-transparent border-2 border-primary-container rounded-full">
+<div class="w-2 h-2 bg-primary-container rounded-full animate-bounce"></div>
+</div>
+<span class="font-label-lg text-primary-container">Extracting Dots...</span>
+</div>
+<!-- Step 3: Pending -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container border-l-4 border-outline-variant opacity-60">
+<div class="w-[32px] h-[32px] flex items-center justify-center border-2 border-outline-variant rounded-full">
+<span class="material-symbols-outlined text-outline-variant text-sm">schedule</span>
+</div>
+<span class="font-label-lg text-on-surface-variant">Translating Pattern...</span>
+</div>
+<!-- Step 4: Pending -->
+<div class="flex items-center gap-4 p-4 rounded-lg bg-surface-container border-l-4 border-outline-variant opacity-60">
+<div class="w-[32px] h-[32px] flex items-center justify-center border-2 border-outline-variant rounded-full">
+<span class="material-symbols-outlined text-outline-variant text-sm">volume_up</span>
+</div>
+<span class="font-label-lg text-on-surface-variant">Generating Speech...</span>
+</div>
+</div>
+</div>
+<!-- Feedback UI (Accessible) -->
+<div class="mt-stack-gap-lg w-full">
+<button class="w-full h-[56px] bg-secondary-container text-on-secondary-container font-bold rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-all focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined">close</span>
+                CANCEL SCAN
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 h-[80px] bg-surface-container-high border-t-2 border-outline-variant">
+<!-- Scan (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-2 min-h-[56px] border-2 border-primary-fixed active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+<span class="font-label-lg text-label-lg">Scan</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-secondary-container p-2 min-h-[56px] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-lg text-label-lg">History</span>
+</a>
+<!-- Learn -->
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-secondary-container p-2 min-h-[56px] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-lg text-label-lg">Learn</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction simulation
+        const steps = document.querySelectorAll('.space-y-stack-gap-sm > div');
+        let currentStep = 1;
+
+        // Mock progression for demonstration
+        setInterval(() => {
+            if (currentStep < steps.length - 1) {
+                // Update previous step to complete
+                const prevStep = steps[currentStep];
+                prevStep.classList.remove('animate-pulse', 'bg-surface-container-highest');
+                prevStep.classList.add('bg-surface-container-high');
+                prevStep.querySelector('div').innerHTML = '<span class="material-symbols-outlined text-on-primary-container text-sm" style="font-variation-settings: \'FILL\' 1;">check</span>';
+                prevStep.querySelector('div').classList.add('bg-primary-container');
+                prevStep.querySelector('span').classList.remove('text-primary-container');
+                prevStep.querySelector('span').classList.add('text-on-surface');
+
+                // Update next step to active
+                currentStep++;
+                const nextStep = steps[currentStep];
+                nextStep.classList.remove('opacity-60', 'bg-surface-container', 'border-outline-variant');
+                nextStep.classList.add('animate-pulse', 'bg-surface-container-highest', 'border-primary-container');
+                nextStep.querySelector('div').classList.remove('border-outline-variant');
+                nextStep.querySelector('div').classList.add('border-primary-container');
+                nextStep.querySelector('div').innerHTML = '<div class="w-2 h-2 bg-primary-container rounded-full animate-bounce"></div>';
+                nextStep.querySelector('span').classList.remove('text-on-surface-variant');
+                nextStep.querySelector('span').classList.add('text-primary-container');
+            }
+        }, 3000);
+    </script>
+</body></html>

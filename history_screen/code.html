@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BrailleVision - Translation History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for high-contrast visibility */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #ffd600; border-radius: 4px; }
+        
+        .focus-ring:focus-within {
+            outline: 4px solid #ffd600;
+            outline-offset: 2px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#70f6ff",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#002022",
+                      "on-tertiary-container": "#00696f",
+                      "outline-variant": "#4d4632",
+                      "on-primary": "#3a3000",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#00373a",
+                      "background": "#131313",
+                      "on-primary-fixed": "#221b00",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed-variant": "#544600",
+                      "primary": "#fff5dc",
+                      "inverse-primary": "#705d00",
+                      "on-primary-container": "#705d00",
+                      "outline": "#999077",
+                      "surface-container-high": "#2a2a2a",
+                      "surface": "#131313",
+                      "tertiary-fixed-dim": "#00dce7",
+                      "primary-fixed": "#ffe170",
+                      "surface-variant": "#353534",
+                      "on-secondary": "#303030",
+                      "surface-tint": "#e9c400",
+                      "on-secondary-fixed-variant": "#474746",
+                      "on-background": "#e5e2e1",
+                      "tertiary": "#d8fcff",
+                      "on-secondary-fixed": "#1b1b1c",
+                      "surface-dim": "#131313",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-container": "#474746",
+                      "on-surface-variant": "#d0c6ab",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "primary-container": "#ffd600",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-fixed": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#004f53",
+                      "surface-bright": "#393939",
+                      "tertiary-container": "#00f0fc",
+                      "on-surface": "#e5e2e1",
+                      "on-error": "#690005",
+                      "on-secondary-container": "#b7b5b4",
+                      "inverse-on-surface": "#313030",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container-highest": "#353534",
+                      "secondary": "#c8c6c5",
+                      "primary-fixed-dim": "#e9c400",
+                      "surface-container": "#201f1f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-gap-md": "20px",
+                      "touch-target-min": "56px",
+                      "container-padding": "24px",
+                      "unit": "8px",
+                      "stack-gap-sm": "12px",
+                      "stack-gap-lg": "32px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "headline-md-mobile": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                      "body-lg": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "headline-sm": ["22px", {"lineHeight": "1.3", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-md": ["28px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                      "label-lg": ["16px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["18px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-[100px]">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 flex justify-between items-center h-[56px] px-container-padding w-full border-b-2 border-outline-variant">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="material-symbols-outlined text-primary-fixed hover:bg-surface-variant p-2 rounded-lg active:scale-95 transition-all">
+                arrow_back
+            </button>
+<h1 class="font-headline-sm-mobile text-headline-sm-mobile font-bold text-primary-fixed">Translation History</h1>
+</div>
+<button aria-label="Settings" class="material-symbols-outlined text-primary-fixed hover:bg-surface-variant p-2 rounded-lg active:scale-95 transition-all">
+            settings
+        </button>
+</header>
+<main class="px-container-padding pt-6 space-y-stack-gap-lg">
+<!-- Search Bar Section -->
+<section class="space-y-4">
+<div class="relative focus-ring rounded-lg">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary-container pointer-events-none">search</span>
+<input aria-label="Search previous translations" class="w-full h-[56px] bg-surface-container-high border-2 border-outline rounded-lg pl-14 pr-4 text-on-surface font-label-lg focus:border-primary-container focus:ring-0 transition-colors placeholder:text-on-surface-variant" placeholder="Search translations..." type="text"/>
+</div>
+<!-- Date Filters -->
+<div aria-label="Filter by date" class="flex gap-stack-gap-sm overflow-x-auto pb-2" role="group">
+<button class="flex-shrink-0 px-6 py-2 bg-primary-container text-on-primary-container font-label-lg rounded-full border-2 border-primary-fixed active:scale-95 transition-all">
+                    All Time
+                </button>
+<button class="flex-shrink-0 px-6 py-2 bg-surface-container-high text-on-surface border-2 border-outline-variant font-label-lg rounded-full hover:bg-surface-variant active:scale-95 transition-all">
+                    Today
+                </button>
+<button class="flex-shrink-0 px-6 py-2 bg-surface-container-high text-on-surface border-2 border-outline-variant font-label-lg rounded-full hover:bg-surface-variant active:scale-95 transition-all">
+                    Yesterday
+                </button>
+<button class="flex-shrink-0 px-6 py-2 bg-surface-container-high text-on-surface border-2 border-outline-variant font-label-lg rounded-full hover:bg-surface-variant active:scale-95 transition-all">
+                    This Week
+                </button>
+</div>
+</section>
+<!-- History List -->
+<section class="space-y-stack-gap-md" role="list">
+<!-- History Card 1 -->
+<article class="bg-surface-container p-container-padding rounded-xl border-2 border-outline-variant space-y-4 hover:border-primary-container transition-colors group" role="listitem">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-widest mb-1">Oct 24, 2023 • 14:30</p>
+<span class="inline-block px-3 py-1 bg-surface-container-highest text-secondary font-label-lg rounded text-sm mb-3">Grade 2 Braille</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-container">more_vert</button>
+</div>
+<p class="text-on-surface font-headline-sm-mobile line-clamp-2">
+                    "Caution: Hazardous materials beyond this point. Eye protection required."
+                </p>
+<div class="pt-4 flex items-center justify-between gap-4">
+<button aria-label="Listen to translation" class="flex-1 h-[56px] bg-primary-container text-on-primary-container font-bold text-lg rounded-lg flex items-center justify-center gap-3 active:scale-95 transition-all focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        LISTEN
+                    </button>
+<button aria-label="Share" class="w-[56px] h-[56px] bg-surface-container-high border-2 border-outline-variant text-primary-fixed rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</article>
+<!-- History Card 2 -->
+<article class="bg-surface-container p-container-padding rounded-xl border-2 border-outline-variant space-y-4 hover:border-primary-container transition-colors" role="listitem">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-widest mb-1">Oct 24, 2023 • 09:15</p>
+<span class="inline-block px-3 py-1 bg-surface-container-highest text-secondary font-label-lg rounded text-sm mb-3">Grade 1 Braille</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+<p class="text-on-surface font-headline-sm-mobile line-clamp-2">
+                    "Meeting Room 402 - Dr. Aris Thorne. Please knock before entering."
+                </p>
+<div class="pt-4 flex items-center justify-between gap-4">
+<button aria-label="Listen to translation" class="flex-1 h-[56px] bg-primary-container text-on-primary-container font-bold text-lg rounded-lg flex items-center justify-center gap-3 active:scale-95 transition-all focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        LISTEN
+                    </button>
+<button aria-label="Share" class="w-[56px] h-[56px] bg-surface-container-high border-2 border-outline-variant text-primary-fixed rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</article>
+<!-- History Card 3 -->
+<article class="bg-surface-container p-container-padding rounded-xl border-2 border-outline-variant space-y-4 hover:border-primary-container transition-colors" role="listitem">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-on-surface-variant font-label-lg uppercase tracking-widest mb-1">Oct 23, 2023 • 18:45</p>
+<span class="inline-block px-3 py-1 bg-surface-container-highest text-secondary font-label-lg rounded text-sm mb-3">Grade 2 Braille</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant">more_vert</button>
+</div>
+<p class="text-on-surface font-headline-sm-mobile line-clamp-2">
+                    "Ingredients: Organic Oat Flour, Sea Salt, Natural Flavors, Sunflower Oil."
+                </p>
+<div class="pt-4 flex items-center justify-between gap-4">
+<button aria-label="Listen to translation" class="flex-1 h-[56px] bg-primary-container text-on-primary-container font-bold text-lg rounded-lg flex items-center justify-center gap-3 active:scale-95 transition-all focus:ring-4 focus:ring-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        LISTEN
+                    </button>
+<button aria-label="Share" class="w-[56px] h-[56px] bg-surface-container-high border-2 border-outline-variant text-primary-fixed rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 h-[80px] bg-surface-container-high border-t-2 border-outline-variant">
+<a aria-label="Scan" class="flex flex-col items-center justify-center text-secondary p-2 min-h-[56px] hover:bg-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+<span class="font-label-lg text-label-lg">Scan</span>
+</a>
+<a aria-label="History" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-2 min-h-[56px] border-2 border-primary-fixed active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-lg text-label-lg">History</span>
+</a>
+<a aria-label="Learn" class="flex flex-col items-center justify-center text-secondary p-2 min-h-[56px] hover:bg-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-lg text-label-lg">Learn</span>
+</a>
+</nav>
+<script>
+        // Simple Haptic-style interaction simulation
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(20);
+                }
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-4', 'ring-primary-container');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-4', 'ring-primary-container');
+        });
+    </script>
+</body></html>

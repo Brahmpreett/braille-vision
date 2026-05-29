@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#70f6ff",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#002022",
+                    "on-tertiary-container": "#00696f",
+                    "outline-variant": "#4d4632",
+                    "on-primary": "#3a3000",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#00373a",
+                    "background": "#131313",
+                    "on-primary-fixed": "#221b00",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed-variant": "#544600",
+                    "primary": "#fff5dc",
+                    "inverse-primary": "#705d00",
+                    "on-primary-container": "#705d00",
+                    "outline": "#999077",
+                    "surface-container-high": "#2a2a2a",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#00dce7",
+                    "primary-fixed": "#ffe170",
+                    "surface-variant": "#353534",
+                    "on-secondary": "#303030",
+                    "surface-tint": "#e9c400",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-background": "#e5e2e1",
+                    "tertiary": "#d8fcff",
+                    "on-secondary-fixed": "#1b1b1c",
+                    "surface-dim": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#474746",
+                    "on-surface-variant": "#d0c6ab",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "primary-container": "#ffd600",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#004f53",
+                    "surface-bright": "#393939",
+                    "tertiary-container": "#00f0fc",
+                    "on-surface": "#e5e2e1",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#b7b5b4",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-highest": "#353534",
+                    "secondary": "#c8c6c5",
+                    "primary-fixed-dim": "#e9c400",
+                    "surface-container": "#201f1f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap-md": "20px",
+                    "touch-target-min": "56px",
+                    "container-padding": "24px",
+                    "unit": "8px",
+                    "stack-gap-sm": "12px",
+                    "stack-gap-lg": "32px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-md-mobile": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "headline-sm": ["22px", {"lineHeight": "1.3", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["28px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                    "label-lg": ["16px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-size: 24px;
+            user-select: none;
+        }
+        .camera-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.6) 100%);
+        }
+        .braille-pulse {
+            animation: border-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes border-pulse {
+            0%, 100% { border-color: rgba(255, 214, 0, 1); }
+            50% { border-color: rgba(255, 214, 0, 0.3); }
+        }
+        .scan-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ffd600;
+            box-shadow: 0 0 15px #ffd600;
+            animation: scan 4s linear infinite;
+            z-index: 10;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        .touch-target {
+            min-height: 56px;
+            min-width: 56px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background">
+<!-- Full Screen Camera View Mockup -->
+<div class="fixed inset-0 z-0 bg-surface-container-lowest">
+<img class="w-full h-full object-cover opacity-60 grayscale-[0.2]" data-alt="A high-contrast, extreme close-up view of a hand touching a page of tactile Braille dots on heavy white paper. The lighting is cinematic and focused, casting long shadows from the raised dots to emphasize their texture. The scene is viewed through a futuristic digital interface with a dark charcoal background and sharp yellow accents, conveying a sense of advanced assistive technology and precise artificial intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3T8714LoqonSp-N7r_gm3iSt7ogS4K0M4hkG2WMxVQwyrzYvtsUC-ppiC_ePCAMx_Mul8jTBXVXkhVLsJR4ONtU1ttxiR2w04IU922zhWC2y2QFEaV-8vvwEjnWMk5pXLCnYX5zuLBS2i3BLg6vL_5ExX_wOFBNOroDtnGbBFqB-got7AHoIW5sZgs4Hm5yB-O5Djm8MIWWdzpEErqvq0h8nWrfByvjENRW-w5p5DtSXVrHvQjO2kJYtw1fzsEoChkBbdqbqro8M"/>
+<div class="camera-overlay absolute inset-0"></div>
+<div class="scan-line"></div>
+</div>
+<!-- AI Bounding Boxes (Overlays) -->
+<div class="absolute inset-0 z-10 pointer-events-none p-container-padding">
+<!-- Box 1 -->
+<div class="absolute top-[30%] left-[20%] w-[120px] h-[80px] border-2 border-primary-container braille-pulse rounded-lg bg-primary-container/10">
+<div class="absolute -top-7 left-0 bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded font-label-lg text-label-lg">
+                Confidence: 98%
+            </div>
+<div class="absolute -bottom-7 left-0 text-primary-fixed font-bold text-label-lg">
+                "Hello"
+            </div>
+</div>
+<!-- Box 2 -->
+<div class="absolute top-[45%] right-[15%] w-[160px] h-[100px] border-2 border-primary-container braille-pulse rounded-lg bg-primary-container/10">
+<div class="absolute -top-7 left-0 bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded font-label-lg text-label-lg">
+                Confidence: 94%
+            </div>
+<div class="absolute -bottom-7 left-0 text-primary-fixed font-bold text-label-lg">
+                "World"
+            </div>
+</div>
+</div>
+<!-- Top App Bar Cluster -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[72px] px-container-padding bg-gradient-to-b from-background/80 to-transparent">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="touch-target flex items-center justify-center bg-surface-container-high/60 backdrop-blur-md rounded-full text-on-surface hover:bg-surface-variant transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-sm-mobile text-headline-sm-mobile font-bold text-primary-fixed tracking-tight">BrailleVision</h1>
+</div>
+<div class="flex gap-2">
+<button aria-label="Toggle Flash" class="touch-target flex items-center justify-center bg-surface-container-high/60 backdrop-blur-md rounded-full text-on-surface hover:bg-surface-variant transition-all active:scale-95 w-[56px]" id="flash-toggle">
+<span class="material-symbols-outlined" data-icon="flashlight_on">flashlight_on</span>
+</button>
+<button aria-label="Toggle Voice Feedback" class="touch-target flex items-center justify-center bg-surface-container-high/60 backdrop-blur-md rounded-full text-primary-container hover:bg-surface-variant transition-all active:scale-95 w-[56px]" id="voice-toggle">
+<span class="material-symbols-outlined" data-icon="record_voice_over" style="font-variation-settings: 'FILL' 1;">record_voice_over</span>
+</button>
+<button aria-label="Settings" class="touch-target flex items-center justify-center bg-surface-container-high/60 backdrop-blur-md rounded-full text-on-surface hover:bg-surface-variant transition-all active:scale-95 w-[56px]">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- UI Overlay for Feedback & Action -->
+<main class="fixed inset-0 flex flex-col justify-end items-center z-40 pb-[120px] pointer-events-none">
+<!-- Status Indicator -->
+<div class="mb-stack-gap-lg flex flex-col items-center gap-2 pointer-events-auto">
+<div class="bg-surface-container-highest/90 backdrop-blur-lg border-2 border-primary-container px-6 py-3 rounded-full flex items-center gap-3 animate-bounce">
+<div class="w-3 h-3 bg-primary-container rounded-full shadow-[0_0_8px_#ffd600]"></div>
+<span class="text-on-surface font-label-lg text-label-lg uppercase tracking-widest">Ready to scan</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md bg-background/40 backdrop-blur-sm px-4 py-1 rounded-lg">Align Braille text within frame</p>
+</div>
+<!-- Primary Capture Button Container -->
+<div class="flex items-center justify-center w-full pointer-events-auto">
+<button class="w-[88px] h-[88px] rounded-full bg-primary-container border-4 border-background flex items-center justify-center shadow-2xl active:scale-90 transition-transform focus:ring-4 focus:ring-primary-container/50" id="capture-btn">
+<div class="w-[64px] h-[64px] rounded-full border-2 border-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[40px]" data-icon="photo_camera" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Consistent with Shared Shell) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-2 h-[80px] bg-surface-container-high dark:bg-surface-container-high border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-2 min-h-[56px] border-2 border-primary-fixed min-w-[80px] active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="photo_camera" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+<span class="font-label-lg text-label-lg">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary p-2 min-h-[56px] min-w-[80px] hover:bg-secondary-container active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-lg text-label-lg">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary p-2 min-h-[56px] min-w-[80px] hover:bg-secondary-container active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-lg text-label-lg">Learn</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions and effects
+        const captureBtn = document.getElementById('capture-btn');
+        const flashBtn = document.getElementById('flash-toggle');
+        const voiceBtn = document.getElementById('voice-toggle');
+
+        captureBtn.addEventListener('click', () => {
+            // Flash effect
+            const flash = document.createElement('div');
+            flash.className = 'fixed inset-0 bg-white z-[100] transition-opacity duration-300 opacity-0';
+            document.body.appendChild(flash);
+            
+            setTimeout(() => {
+                flash.classList.add('opacity-100');
+                setTimeout(() => {
+                    flash.classList.remove('opacity-100');
+                    setTimeout(() => flash.remove(), 300);
+                }, 50);
+            }, 0);
+
+            // Simulation of haptic feedback (if available)
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(100);
+            }
+        });
+
+        flashBtn.addEventListener('click', function() {
+            const icon = this.querySelector('.material-symbols-outlined');
+            if (icon.textContent === 'flashlight_on') {
+                icon.textContent = 'flashlight_off';
+                this.classList.replace('text-on-surface', 'text-primary-container');
+            } else {
+                icon.textContent = 'flashlight_on';
+                this.classList.replace('text-primary-container', 'text-on-surface');
+            }
+        });
+
+        voiceBtn.addEventListener('click', function() {
+            const icon = this.querySelector('.material-symbols-outlined');
+            const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+            if (isFilled) {
+                icon.style.fontVariationSettings = "'FILL' 0";
+                this.classList.replace('text-primary-container', 'text-on-surface');
+            } else {
+                icon.style.fontVariationSettings = "'FILL' 1";
+                this.classList.replace('text-on-surface', 'text-primary-container');
+            }
+        });
+
+        // Dynamic bounding box movement simulation
+        const boxes = document.querySelectorAll('.braille-pulse');
+        setInterval(() => {
+            boxes.forEach(box => {
+                const moveX = (Math.random() - 0.5) * 4;
+                const moveY = (Math.random() - 0.5) * 4;
+                box.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        }, 1000);
+    </script>
+</body></html>
